@@ -33,7 +33,9 @@
 					{% endif %}
 				</div>
 				<strong>{{ comment.author }}</strong>
-				<p>{{ comment.text| markdown | safe | linebreaks }}</p>
+				<div class="highlight l">
+					<p>{{ comment.text| markdown | safe | linebreaks }}</p>
+				</div>
 			</div>
 		{% endif %}
 	{% empty %}
