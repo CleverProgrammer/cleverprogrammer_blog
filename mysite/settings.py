@@ -28,6 +28,7 @@ SECRET_KEY = 'kr0!(fzdkbdc-n5*!7)zpcfqmaj@+)=xip^g+1g(m*3va+dj3@'
 # ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 # Application definition
+LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['blog/templates/blog/registration'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
