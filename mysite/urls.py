@@ -17,13 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from django.contrib.auth.views import login
+from django.contrib.auth.views import logout
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(regex=r'^accounts/login/$',
-        view=login,
-        kwargs={'template_name': 'login.html'},
-        name='login'
-        ),
+    url(regex=r'^accounts/login/$', view=login, kwargs={'template_name': 'login.html'}, name='login'),
+    url(regex=r'^accounts/logout/$', view=logout, kwargs={'template_name': 'logout.html', 'next_page': '/'},
+        name='logout'),
     url(r'', include('blog.urls')),
 ]
