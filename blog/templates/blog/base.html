@@ -19,7 +19,7 @@
 				<p class="top-menu">Hello {{ user.username }}
 					<small>(<a href="{% url 'logout' %}">Log out</a>)</small>
 				</p>
-				<p class="top-menu">{{ user.notifications.count }}</p>
+				<p class="top-menu" style="color: green">{{ user.notifications.count }}</p>
 			{% else %}
 				<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
 			{% endif %}
