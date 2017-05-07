@@ -1,3 +1,4 @@
+stripe
 appnope==0.1.0
 blessings==1.6
 bpython==0.16

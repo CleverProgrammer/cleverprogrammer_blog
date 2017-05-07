@@ -6,7 +6,13 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .form import PostForm, CommentForm, UserForm
+from mysite.settings import STRIPE_API_TEST_KEY
 from notifications.views import AllNotificationsList, UnreadNotificationsList, live_unread_notification_list
+
+import stripe
+
+stripe.api_key = STRIPE_API_TEST_KEY
+print(STRIPE_API_TEST_KEY)
 
 
 def post_list(request):
@@ -106,4 +112,23 @@ def signup(request):
             return HttpResponseRedirect('/')
     else:
         form = UserForm()
-    return render(request, 'blog/registration/signup.html', {'form': form})
+    return render(
+        request,
+        'blog/registration/signup.html',
+        {'form': form, 'stripe_test_api_key': stripe.api_key}
+    )
+
+
+def cp_payment(request):
+    if request.method == 'POST':
+        token = request.POST['stripeToken']
+        charge = stripe.Charge.create(
+            amount=99,
+            currency='usd',
+            description='Example charge',
+            source=token,
+        )
+        print(token)
+        return redirect('post_list')
+    else:
+        return render(request, '')
