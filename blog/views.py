@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .form import PostForm, CommentForm
-from notifications.views import AllNotificationsList, UnreadNotificationsList
+from notifications.views import AllNotificationsList, UnreadNotificationsList, live_unread_notification_list
 
 
 def post_list(request):
@@ -12,8 +12,9 @@ def post_list(request):
 
 
 def my_unread_notifications(request):
-    my_unreads = UnreadNotificationsList
-    return render(request, 'blog/unread_notifications.html', {'my_unreads': my_unreads})
+    my_unreads = request.user.notifications.unread()
+    live_unreads = live_unread_notification_list(request)
+    return render(request, 'blog/unread_notifications.html', {'my_unreads': my_unreads, 'live_unreads': live_unreads})
 
 
 @login_required

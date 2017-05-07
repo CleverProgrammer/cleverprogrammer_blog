@@ -21,8 +21,7 @@
 				<p class="top-menu">Hello {{ user.username }}
 					<small>(<a href="{% url 'logout' %}">Log out</a>)</small>
 				</p>
-				<a href="{% url 'notifications:mark_all_as_read' %}">{% live_notify_badge classes="badge" %}</a>
-				<p class="top-menu" style="color: green"></p>
+				<a href="{% url 'my_unread_notifications' %}" class="top-menu">{% notifications_unread %}</a>
 			{% else %}
 				<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
 			{% endif %}

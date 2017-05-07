@@ -1,6 +1,13 @@
 {% extends 'blog/base.html' %}
 {% load notifications_tags %}
 
-{% for unread in my_unreads %}
-	<a href="#">{{ unread }}</a>
-{% endfor %}
+{% block content %}
+	{% for my_unread in my_unreads %}
+		<a href="{% url 'post_detail' pk=my_unread.actor.post.pk %}">{{ my_unread }}</a>
+	{% endfor %}
+
+	{#	{% for live_unread in live_unreads %}#}
+	{#		{{ live_unread }}#}
+	{#	{% endfor %}#}
+
+{% endblock %}
