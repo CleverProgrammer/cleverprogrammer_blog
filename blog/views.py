@@ -1,8 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
-from .form import PostForm, CommentForm
+from .form import PostForm, CommentForm, UserForm
 from notifications.views import AllNotificationsList, UnreadNotificationsList, live_unread_notification_list
 
 
@@ -92,3 +95,15 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+            login(request, new_user)
+            return HttpResponseRedirect('/')
+    else:
+        form = UserForm()
+    return render(request, 'blog/registration/signup.html', {'form': form})

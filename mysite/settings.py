@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'blog',
     'notifications',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 DEBUG = False
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 try:
     from .local_settings import *
