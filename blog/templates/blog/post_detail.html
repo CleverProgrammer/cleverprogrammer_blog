@@ -14,7 +14,7 @@
 			<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 		{% endif %}
 		<h1>{{ post.title }}</h1>
-		<p>{{ post.text|linebreaksbr }}</p>
+		<p>{{ post.text| markdown | safe | linebreaksbr }}</p>
 	</div>
 	<hr>
 	<a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-default">Add comment</a>
@@ -33,7 +33,7 @@
 					{% endif %}
 				</div>
 				<strong>{{ comment.author }}</strong>
-					<p>{{ comment.text| markdown | safe | linebreaks }}</p>
+				<p>{{ comment.text| markdown | safe | linebreaks }}</p>
 			</div>
 		{% endif %}
 	{% empty %}
