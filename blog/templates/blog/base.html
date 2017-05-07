@@ -13,18 +13,22 @@
 	</head>
 	<body>
 		<div class="page-header">
+			<script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+			{% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
 			{% if user.is_authenticated %}
 				<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
 				<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 				<p class="top-menu">Hello {{ user.username }}
 					<small>(<a href="{% url 'logout' %}">Log out</a>)</small>
 				</p>
-				<p class="top-menu" style="color: green">{{ user.notifications.count }}</p>
+				<a href="{% url 'notifications:mark_all_as_read' %}">{% live_notify_badge classes="badge" %}</a>
+				<p class="top-menu" style="color: green"></p>
 			{% else %}
 				<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
 			{% endif %}
-			<h1><a href="/">Clever Programmer Blog</a></h1>
+			<h1><a href="/">Clever Programmer Blog </a></h1>
 		</div>
+		{% live_notify_list classes="dropdown-menu" %}
 		<div class="content container">
 			<div class="row">
 				<div class="col-md-8">

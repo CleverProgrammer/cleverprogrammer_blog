@@ -1,0 +1,6 @@
+{% extends 'blog/base.html' %}
+{% load notifications_tags %}
+
+{% for unread in my_unreads %}
+	<a href="#">{{ unread }}</a>
+{% endfor %}
