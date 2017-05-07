@@ -13,8 +13,8 @@ def post_list(request):
 
 def my_unread_notifications(request):
     my_unreads = request.user.notifications.unread()
-    live_unreads = live_unread_notification_list(request)
-    return render(request, 'blog/unread_notifications.html', {'my_unreads': my_unreads, 'live_unreads': live_unreads})
+    # live_unreads = live_unread_notification_list(request)
+    return render(request, 'blog/unread_notifications.html', {'my_unreads': my_unreads})
 
 
 @login_required

@@ -10,11 +10,12 @@
 				<p>
 					<strong>{{ my_unread.actor.author }}</strong> says: {{ my_unread.actor.text | markdown | safe }}
 				</p>
-				<p style="background-color: floralwhite;">on <a href="{% url 'post_detail' pk=my_unread.actor.post.pk %}">{{ my_unread.actor.post.title }}</a>
-				about <em>{{ my_unread.timestamp|naturaltime }}</em></p>
+				<p style="background-color: floralwhite;">on
+					<a href="{% url 'post_detail' pk=my_unread.actor.post.pk %}">{{ my_unread.actor.post.title }}</a>
+					about <em>{{ my_unread.timestamp|naturaltime }}</em></p>
 			</div>
-			<hr>
 		</div>
+		<hr>
 	{% endfor %}
 
 	{#	{% for live_unread in live_unreads %}#}
