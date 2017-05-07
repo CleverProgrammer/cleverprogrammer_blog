@@ -26,5 +26,6 @@ urlpatterns = [
     url(regex=r'^accounts/logout/$', view=logout, kwargs={'template_name': 'logout.html', 'next_page': '/'},
         name='logout'),
     url(r'', include('blog.urls')),
+    url(r'^my_unreads/', include('blog.urls')),
     url(r'^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
