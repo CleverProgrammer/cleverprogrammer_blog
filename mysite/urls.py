@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import notifications.urls
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -24,5 +25,6 @@ urlpatterns = [
     url(regex=r'^accounts/login/$', view=login, kwargs={'template_name': 'login.html'}, name='login'),
     url(regex=r'^accounts/logout/$', view=logout, kwargs={'template_name': 'logout.html', 'next_page': '/'},
         name='logout'),
+    url(r'^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     url(r'', include('blog.urls')),
 ]
