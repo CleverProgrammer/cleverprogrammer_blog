@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% if user.is_authenticated and user.username == 'cleverprogrammer' %}
+		{% for customer in customers %}
+			<p>{{ customer }}</p>
+		{% endfor %}
+
+	{% endif %}
+{% endblock %}

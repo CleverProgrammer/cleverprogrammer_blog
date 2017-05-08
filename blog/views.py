@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -133,3 +133,12 @@ def checkout(request):
         'blog/checkout/checkout.html',
         {'stripe_test_api_pk': STRIPE_API_TEST_PK}
     )
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def dashboard(request):
+    """
+    All student invoices and homework assignemnts will be viewed from here.
+    """
+    customers = stripe.Customer.list()
+    return render(request, 'blog/students/dashboard.html', {'customers': customers})

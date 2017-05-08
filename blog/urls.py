@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^my_unreads/$', views.my_unread_notifications, name='my_unread_notifications'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^checkout/$', views.checkout, name='checkout'),
+    url(r'^dashboard/$', views.dashboard, name='dashboard'),
 ]
