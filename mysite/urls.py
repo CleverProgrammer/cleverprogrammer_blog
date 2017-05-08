@@ -27,4 +27,5 @@ urlpatterns = [
         name='logout'),
     url(r'', include('blog.urls')),
     url(r'^inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    url(r'^avatar/', include('avatar.urls'))
 ]

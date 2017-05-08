@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load markdownify %}
+{% load avatar_tags %}
 
 {% block content %}
 	<div class="post">
@@ -23,16 +24,16 @@
 			<div class="comment">
 				<div class="date">
 					{{ comment.created_date }}
-					{% if not comment.approved_comment and user.is_superuser %}
-						<a href="{% url 'comment_approve' pk=comment.pk %}" class="btn btn-default">
-							<span class="glyphicon glyphicon-ok"></span>
-						</a>
-						<a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-default">
-							<span class="glyphicon glyphicon-remove"></span>
-						</a>
-					{% endif %}
 				</div>
-				<strong>{{ comment.author }}</strong>
+				{% if not comment.approved_comment and user.is_superuser %}
+					<a href="{% url 'comment_approve' pk=comment.pk %}" class="btn btn-default">
+						<span class="glyphicon glyphicon-ok"></span>
+					</a>
+					<a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				{% endif %}
+				{% avatar user 50 class="img-circle img-responsive" id="user_avatar" %}<strong>{{ comment.author }}</strong>
 				<p>{{ comment.text| markdown | safe | linebreaks }}</p>
 			</div>
 		{% endif %}

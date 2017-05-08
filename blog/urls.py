@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^checkout/$', views.checkout, name='checkout'),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
+    url('^my_profile/$', views.my_profile, name='my_profile')
 ]

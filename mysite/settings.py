@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'notifications',
     'crispy_forms',
+    'avatar',
 ]
 
 MIDDLEWARE = [

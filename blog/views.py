@@ -143,3 +143,11 @@ def dashboard(request):
     """
     customers = stripe.Customer.list()
     return render(request, 'blog/students/dashboard.html', {'customers': customers})
+
+
+@login_required
+def my_profile(request):
+    """
+    User profiles with ability to change avatars
+    """
+    return render(request, 'blog/students/profile.html')
