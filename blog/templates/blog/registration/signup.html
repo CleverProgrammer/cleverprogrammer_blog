@@ -12,7 +12,7 @@
 		{% csrf_token %}
 		<script
 				src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-				data-key="{{ stripe_test_api_key }}"
+				data-key="{{ stripe_test_api_pk }}"
 				data-amount="99"
 				data-name="{{ user.username }}"
 				data-description="Widget"

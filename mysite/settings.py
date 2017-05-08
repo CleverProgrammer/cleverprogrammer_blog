@@ -130,8 +130,8 @@ DEBUG = False
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-STRIPE_API_TEST_KEY = os.environ.get('STRIPE_API_TEST_KEY')
-STRIPE_API_REAL_KEY = os.environ.get('STRIPE_API_KEY')
+STRIPE_API_TEST_PK = os.environ.get('STRIPE_API_TEST_PK')
+STRIPE_API_TEST_SK = os.environ.get('STRIPE_API_TEST_SK')
 
 try:
     from .local_settings import *
