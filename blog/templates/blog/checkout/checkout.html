@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	<form action="{% url 'checkout' %}" method="POST">
+		{% csrf_token %}
+		<script
+				src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="{{ stripe_test_api_pk }}"
+				data-amount="99"
+				data-name="{{ user.username }}"
+				data-description="Widget"
+				data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+				data-locale="auto">
+		</script>
+	</form>
+{% endblock %}

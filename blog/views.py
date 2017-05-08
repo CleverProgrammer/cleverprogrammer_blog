@@ -114,11 +114,11 @@ def signup(request):
     return render(
         request,
         'blog/registration/signup.html',
-        {'form': form, 'stripe_test_api_pk': STRIPE_API_TEST_PK}
+        {'form': form}
     )
 
 
-def cp_payment(request):
+def checkout(request):
     if request.method == 'POST':
         token = request.POST['stripeToken']
         charge = stripe.Charge.create(
@@ -128,4 +128,8 @@ def cp_payment(request):
             source=token,
         )
         return HttpResponseRedirect('/')
-    return redirect('signup')
+    return render(
+        request,
+        'blog/checkout/checkout.html',
+        {'stripe_test_api_pk': STRIPE_API_TEST_PK}
+    )
