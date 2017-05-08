@@ -35,3 +35,4 @@ stripe==1.55.0
 traitlets==4.3.2
 wcwidth==0.1.7
 whitenoise==3.3.0
+psycopg2
