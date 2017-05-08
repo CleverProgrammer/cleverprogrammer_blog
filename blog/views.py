@@ -102,6 +102,7 @@ def post_publish(request, pk):
     return redirect('post_detail', pk=pk)
 
 
+@user_passes_test(lambda user: user.is_anonymous)
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
