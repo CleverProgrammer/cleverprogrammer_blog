@@ -6,12 +6,12 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .form import PostForm, CommentForm, UserForm
-from mysite.settings import STRIPE_API_TEST_SK, STRIPE_API_TEST_PK
+from mysite.settings import STRIPE_API_TEST_SK, STRIPE_API_TEST_PK, STRIPE_API_LIVE_PK, STRIPE_API_LIVE_SK
 from notifications.views import AllNotificationsList, UnreadNotificationsList, live_unread_notification_list
 
 import stripe
 
-stripe.api_key = STRIPE_API_TEST_SK
+stripe.api_key = STRIPE_API_LIVE_SK
 
 
 def post_list(request):
@@ -132,7 +132,7 @@ def checkout(request):
     return render(
         request,
         'blog/checkout/checkout.html',
-        {'stripe_test_api_pk': STRIPE_API_TEST_PK}
+        {'stripe_test_api_pk': STRIPE_API_LIVE_PK}
     )
 
 
@@ -141,8 +141,53 @@ def dashboard(request):
     """
     All student invoices and homework assignemnts will be viewed from here.
     """
-    customers = stripe.Customer.list()
-    return render(request, 'blog/students/dashboard.html', {'customers': customers})
+    # customers = stripe.SubscriptionItem.list(subscription='sub_AW77u4xuqfsC4g')
+    # customer['subscriptions']['data'][0]['id']
+    starting_after = None
+    all_customers = []
+    while True:
+        customers = stripe.Customer.list(limit=100, starting_after=starting_after)
+        print(starting_after)
+        if len(customers.data) == 0:
+            break
+        for customer in customers:
+            all_customers.append(customer)
+        starting_after = customers.data[-1].id
+    print(len(all_customers))
+    # print(all_customers[0]['subscriptions']['data'][0]['id'])
+    # print(all_customers[0]['subscriptions']['data'][0]['id'])
+    final_customers = []
+    # final_customers = all_customers[0]
+    # for customer in all_customers:
+    #     try:
+    #         if customer['subscriptions']['data'][0]['id'] == "sub_AW77u4xuqfsC4g":
+    #             final_customers.append(customer)
+    #     except IndexError:
+    #         pass
+    #
+    # print(stripe.Subscription.list(limit=10))
+    all_subs = []
+    for customer in all_customers:
+        # print(customer.id, customer.subscriptions)
+        if customer.subscriptions.data:
+            all_subs.append((customer.email, customer.subscriptions.data[0].plan.amount / 100))
+    mrr = 0
+    for customer, amount in all_subs:
+        mrr += amount
+
+    # all_subs = stripe.Subscription.list(status='active')
+
+    # for customer in all_customers:
+    #     print(stripe.Subscription.list(status='active', customer=customer.id))
+
+    # all_subs =
+    # final_customers = [customer for customer in all_customers if
+    # customer['subscriptions']['data'][0]['id'] == "sub_AW77u4xuqfsC4g"]
+    # acm_students = [customer['data'][0]['subscriptions']['data'][0]['id'] for customer in all_customers]
+
+    # customers = stripe.Customer.list(limit=25, include=['total_count'])
+    # print(customers.total_count)
+    return render(request, 'blog/students/dashboard.html', {'customers': all_subs, 'mrr': mrr})
 
 
 @login_required

@@ -1,5 +1,11 @@
 {% extends 'blog/base.html' %}
+{% load avatar_tags %}
 
 {% block content %}
-	<a href="{% url 'avatar_change' %}">Change your avatar</a>
+	<div>
+		{% avatar user %}
+		<a href="{% url 'avatar_change' %}">Change your avatar</a>
+		<p>Your username: {{ user.username }}</p>
+		<p>Your email: {{ user.email }}</p>
+	</div>
 {% endblock %}

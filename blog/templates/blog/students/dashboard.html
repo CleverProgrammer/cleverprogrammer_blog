@@ -2,6 +2,7 @@
 
 {% block content %}
 	{% if user.is_authenticated and user.username == 'cleverprogrammer' %}
+		<h1>Tota: {{ mrr }}/month</h1>
 		{% for customer in customers %}
 			<p>{{ customer }}</p>
 		{% endfor %}

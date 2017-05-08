@@ -134,6 +134,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 STRIPE_API_TEST_PK = os.environ.get('STRIPE_API_TEST_PK')
 STRIPE_API_TEST_SK = os.environ.get('STRIPE_API_TEST_SK')
 
+STRIPE_API_LIVE_PK = os.environ.get('STRIPE_API_LIVE_PK')
+STRIPE_API_LIVE_SK = os.environ.get('STRIPE_API_LIVE_SK')
+
 try:
     from .local_settings import *
 except ImportError:
