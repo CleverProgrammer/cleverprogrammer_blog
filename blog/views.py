@@ -128,5 +128,4 @@ def cp_payment(request):
             source=token,
         )
         return HttpResponseRedirect('/')
-    else:
-        return render(request, '')
+    return redirect('signup')
