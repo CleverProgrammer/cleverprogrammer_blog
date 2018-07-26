@@ -17,7 +17,9 @@ def post_list(request):
 @login_required
 def my_unread_notifications(request):
     my_unreads = request.user.notifications.unread()
-    # live_unreads = live_unread_notification_list(request)
+    # actor is a Comment object and has access to all of Comment model's attributes
+    # print(my_unreads[0].actor.post)
+    # request.user.notifications.mark_all_as_read()
     return render(request, 'blog/unread_notifications.html', {'my_unreads': my_unreads})
 
 
